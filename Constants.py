@@ -29,7 +29,7 @@ class Constants:
     FootLeft = 19
     FootRight = 20
         
-    DatasetFolder = 'E:\P R O D I G Y\A C A D E M I C\IUT SWE\SEM 5\R E S E A R C H\Python Implementation\Gait\DataSet\'
-    TrainingSetFolder = 'E:\P R O D I G Y\A C A D E M I C\IUT SWE\SEM 5\R E S E A R C H\Python Implementation\Gait\TrainingSet\'
-    TestSetFolder = 'E:\P R O D I G Y\A C A D E M I C\IUT SWE\SEM 5\R E S E A R C H\Python Implementation\Gait\TestSet\'
-    TrainingFileNamePrefix = 'User_Information_'
+    DatasetFolder = "E:\\P R O D I G Y\\A C A D E M I C\\IUT SWE\\SEM 5\\R E S E A R C H\\Python Implementation\\Gait\\DataSet\\"
+    TrainingSetFolder = "E:\\P R O D I G Y\\A C A D E M I C\\IUT SWE\\SEM 5\\R E S E A R C H\\Python Implementation\\Gait\\TrainingSet\\"
+    TestSetFolder = "E:\\P R O D I G Y\\A C A D E M I C\\IUT SWE\\SEM 5\\R E S E A R C H\\Python Implementation\\Gait\\TestSet\\"
+    TrainingFileNamePrefix = "User_Information_"
