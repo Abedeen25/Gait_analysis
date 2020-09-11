@@ -12,3 +12,5 @@ def CalculateAnkleDistance(data):
         zDiff = data[C.Constants.AnkleLeft][C.Constants.zCord][i] - data[C.Constants.AnkleRight][C.Constants.zCord][i]
 
         ankleDistance[1][i] = np.sqrt( xDiff**2 + yDiff**2 + zDiff**2)
+
+    return ankleDistance    
