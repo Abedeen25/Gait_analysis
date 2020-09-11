@@ -1,5 +1,4 @@
 class Constants:
-
     TotalJoints = 20
     Coordinates = 3
     xCord = 1
