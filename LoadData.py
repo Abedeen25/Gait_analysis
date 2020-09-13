@@ -34,6 +34,7 @@ def LoadData():
             angleArray = [float(x) for x in temp.split()]
             angleArray = np.transpose(angleArray)
             angleDataArray[j,_,i] = angleArray
+
         fileID.close()
 
     return angleDataArray, userNameArray, userFrameArray
