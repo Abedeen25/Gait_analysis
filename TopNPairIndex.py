@@ -1,4 +1,5 @@
 import Constants as C
+import math
 
 def TopNPairIndex():
     totalFrame = list()
@@ -14,7 +15,7 @@ def TopNPairIndex():
     for i in range (0, angleCount):
         histogram = zeros(1, 181)
         for j in range (0, totalFrame):
-            angle = (angleArray[j][i] * 180) / pi
+            angle = (angleArray[j][i] * 180) / math.pi
             angle = round(angle) + 1
             histogram[angle] = histogram[angle] + 1
         count = 0
