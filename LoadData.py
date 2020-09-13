@@ -21,11 +21,11 @@ def LoadData():
         userNameArray[i] = userName
         userFrameArray[i] = frameCount
 
-        for i in range(frameCount):
+        for j in range(frameCount):
             temp = fileID.readline().rstrip()
             angleArray = [float(x) for x in temp.split()]
             angleArray = np.transpose(angleArray)
-            angleDataArray[j][:][i] = angleArray;
+            angleDataArray[j][:][i] = angleArray
         fileID.close()
 
     return angleDataArray, userNameArray, userFrameArray
