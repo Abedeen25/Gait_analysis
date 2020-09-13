@@ -2,7 +2,7 @@ import Constants as C
 import numpy as np
 
 def StoreData(userID, userName, angleArray):
-    fileName = C.Constants.TrainingSetFolder+C.Constants.TrainingFileNamePrefix+str(userID)+'.txt')
+    fileName = str(C.Constants.TrainingSetFolder)+str(C.Constants.TrainingFileNamePrefix)+str(userID)+'.txt'
     fileID = open(fileName, 'w')
     sz = np.shape(angleArray)
     totalFrame = sz[0][0]
