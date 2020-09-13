@@ -2,6 +2,7 @@ import Constants
 import CalculateAnkleDistance
 import CalculateAngle
 import math
+import statistics as stat
 import numpy as np
 import TopNPairIndex
 from scipy.signal import find_peaks
@@ -35,7 +36,7 @@ def Train(userCount):
         ankleDistance = CalculateAnkleDistance.CalculateAnkleDistance(data)
         span = math.floor(len(ankleDistance)/Constants.Constants.SpanDivide)
         smoothAnkleDistance = smooth(ankleDistance,span)
-        [_,locs] =  find_peaks(smoothAnkleDistance,,mean(smoothAnkleDistance),5)
+        [_,locs] =  find_peaks(smoothAnkleDistance,,np.mean(smoothAnkleDistance),5)
         start = locs[1,1]
         if(len(locs)<3):
             fin = len(smoothAnkleDistance)
