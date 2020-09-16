@@ -1,9 +1,9 @@
 class Constants:
     TotalJoints = 20
     Coordinates = 3
-    xCord = 1
-    yCord = 2
-    zCord = 3
+    xCord = 0
+    yCord = 1
+    zCord = 2
     MinBin = 20
 
     SpanDivide = 5

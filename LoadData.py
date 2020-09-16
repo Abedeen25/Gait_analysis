@@ -12,28 +12,39 @@ def ncr(n, r):
 
 def LoadData():
     fileID = open((C.Constants.TrainingSetFolder+'metadata.txt'), 'r')
+    x = fileID.readline().rstrip()
+    print(x)
     userCount = int(fileID.readline().rstrip())
     maxFrame = int(fileID.readline().rstrip())
     fileID.close()
 
     maxAngleCount = ncr(C.Constants.TotalJoints-1, 2)
-    angleDataArray = np.zeros((maxFrame, maxAngleCount, userCount))
+    #angleDataArray = list(maxFrame, maxAngleCount, userCount)
     userNameArray = ['']*userCount
-    userFrameArray = np.zeros((1, userCount))
+    userFrameArray = [0]*userCount
+    angleDataArray = [[[0 for k in range(userCount)] for j in range(maxAngleCount)] for i in range(maxFrame)]
+
 
     for i in range(userCount):
+        if(i+1 == 21):
+            break
         fileName = C.Constants.TrainingSetFolder+C.Constants.TrainingFileNamePrefix+str(i+1)+'.txt'
         fileID = open(fileName, 'r')
         userName = fileID.readline().rstrip()
         frameCount = int(fileID.readline().rstrip())
+       
         userNameArray[i] = userName
         userFrameArray[i] = frameCount
+        #print('Username: ',userName)
 
         for j in range(frameCount):
             temp = fileID.readline().rstrip()
             angleArray = [float(x) for x in temp.split()]
-            angleArray = np.transpose(angleArray)
-            angleDataArray[j,_,i] = angleArray
+            #angleArray = np.transpose(angleArray)
+            #angleDataArray[j,_,i] = angleArray
+            for k in range(len(angleArray)):
+                angleDataArray[j][k][i] = angleArray[k]
         fileID.close()
 
-    return angleDataArray, userNameArray, userFrameArray
+    return angleDataArray, userNameArray, userFrameArray,maxFrame,maxAngleCount
+
