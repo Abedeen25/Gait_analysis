@@ -1,37 +1,8 @@
 import json
 
 data = {}
-data['UTKinect'] = []
-data['UPCV'] = []
-data['general'] = []
-
-data['UPCV'].append(
-    {
-        'SpanDivide' : 5,
-        'Head' : 1,
-        'ShoulderCenter' : 2,
-        'ShoulderLeft' : 3,
-        'ShoulderRight' : 4,
-        'ElbowLeft' : 5,
-        'ElbowRight' : 6,
-        'WristLeft' : 7,
-        'WristRight' : 8,
-        'HandLeft' : 9,
-        'HandRight' : 10,
-        'Spine' : 11,
-        'HipCenter' : 12,
-        'HipLeft' : 13,
-        'HipRight' : 14,
-        'KneeLeft' : 15,
-        'KneeRight' : 16,
-        'AnkleLeft' : 17,
-        'AnkleRight' : 18,
-        'FootLeft' : 19,
-        'FootRight' : 20
-    })
-
-data['UTKinect'].append(
-    {
+data['UTKinect'] = {
+        'UserCount' : 10,
         'SpanDivide' : 10,
         'HipCenter' : 1,
         'Spine' : 2,
@@ -52,25 +23,47 @@ data['UTKinect'].append(
         'HipRight' : 17,
         'KneeRight' : 18,
         'AnkleRight' : 19,
-        'FootRight' : 20
+        'FootRight' : 20,
+        'Folder' : 'UTKinect',
     }
-)
-
-data['general'].append(
-    {
+data['UPCV'] = {
+        'UserCount' : 15,
+        'SpanDivide' : 5,
+        'Head' : 1,
+        'ShoulderCenter' : 2,
+        'ShoulderLeft' : 3,
+        'ShoulderRight' : 4,
+        'ElbowLeft' : 5,
+        'ElbowRight' : 6,
+        'WristLeft' : 7,
+        'WristRight' : 8,
+        'HandLeft' : 9,
+        'HandRight' : 10,
+        'Spine' : 11,
+        'HipCenter' : 12,
+        'HipLeft' : 13,
+        'HipRight' : 14,
+        'KneeLeft' : 15,
+        'KneeRight' : 16,
+        'AnkleLeft' : 17,
+        'AnkleRight' : 18,
+        'FootLeft' : 19,
+        'FootRight' : 20,
+        'Folder' : 'UPCV',
+    }
+data['general'] = {
         'TotalJoints' : 20,
+        'CoordinatesCount' : 3,
         'xCord' : 0,
         'yCord' : 1,
         'zCord' : 2,
         'MinBin' : 20,
-        'DatasetFolder' : 'DataSet/',
-        'UPCVFolder' : 'UPCV',
-        'UTKinectFolder' : 'UTKinect',
-        'TrainingSetFolder' : 'TrainingSet/',
-        'TestSetFolder' : 'TestSet/',
+        'DatasetFolder' : 'DataSet',
+        'TrainingSetFolder' : 'TrainingSet',
+        'TestSetFolder' : 'TestSet',
         'TrainingFileNamePrefix' : 'User_Information_'
     }
-)
+
 
 with open('constants.json', 'w') as outfile:
-    json.dumps(data, outfile)
+    json.dump(data, outfile)
