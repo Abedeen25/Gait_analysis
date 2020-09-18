@@ -4,12 +4,12 @@ def findWarpPathLength(train, test):
     maxThetaTest = -1
 
     for i in range(len(train)):
-        if(maxThetaTrain < abs(train[0][i])):
-            maxThetaTrain = abs(train[0][i])
+        if(maxThetaTrain < abs(train[i])):
+            maxThetaTrain = abs(train[i])
 
     for i in range(len(test)):
-        if (maxThetaTest < abs(test[0][i])):
-            maxThetaTest = abs(test[0][i])
+        if (maxThetaTest < abs(test[i])):
+            maxThetaTest = abs(test[i])
 
     maxOfBoth = max(maxThetaTrain, maxThetaTest)
     absTrainPlusTest = maxThetaTrain + maxThetaTest
