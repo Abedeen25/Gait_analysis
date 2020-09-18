@@ -1,12 +1,11 @@
 import json
 
 data = {}
-data['constants'] = {}
-data['constants']['UTKinect'] = []
-data['constants']['UPCV'] = []
-data['constants']['general'] = []
+data['UTKinect'] = []
+data['UPCV'] = []
+data['general'] = []
 
-data['constants']['UPCV'].append(
+data['UPCV'].append(
     {
         'SpanDivide' : 5,
         'Head' : 1,
@@ -31,7 +30,7 @@ data['constants']['UPCV'].append(
         'FootRight' : 20
     })
 
-data['constants']['UTKinect'].append(
+data['UTKinect'].append(
     {
         'SpanDivide' : 10,
         'HipCenter' : 1,
@@ -57,7 +56,7 @@ data['constants']['UTKinect'].append(
     }
 )
 
-data['constants']['general'].append(
+data['general'].append(
     {
         'TotalJoints' : 20,
         'xCord' : 0,
@@ -72,4 +71,4 @@ data['constants']['general'].append(
 )
 
 with open('constants.json', 'w') as outfile:
-    json.dump(data, outfile)
+    json.dumps(data, outfile)
