@@ -63,7 +63,9 @@ data['general'].append(
         'yCord' : 1,
         'zCord' : 2,
         'MinBin' : 20,
-        'DatasetFolder' : 'Dataset/',
+        'DatasetFolder' : 'DataSet/',
+        'UPCVFolder' : 'UPCV',
+        'UTKinectFolder' : 'UTKinect',
         'TrainingSetFolder' : 'TrainingSet/',
         'TestSetFolder' : 'TestSet/',
         'TrainingFileNamePrefix' : 'User_Information_'
