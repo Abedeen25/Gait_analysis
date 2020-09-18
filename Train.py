@@ -7,6 +7,7 @@ import numpy as np
 import TopNPairIndex
 import scipy.signal as ss
 from findpeaks import findpeaks
+import StoreData
 
 def smooth(iterable, size):
     i = 0
@@ -20,14 +21,18 @@ def smooth(iterable, size):
     return moving_aves
 
 def Train(userCount):
+    # print("IN METHOD TRAIN")
     maxFrame = 0
     for id in range (userCount):
         locs = []
         userName = str(id+1)
         
-        FileLocation = Constants.Constants.DatasetFolder+"UPCV\\action_"
-        fileID = open(FileLocation+str((id*2)+1)+'.txt','r')
+        FileLocation = Constants.Constants.DatasetFolder+"joints_s"
+        # print("Opening", FileLocation)
+        print(FileLocation+str(id+1).zfill(2)+'_e01.txt')
+        fileID = open(FileLocation+str(id+1).zfill(2)+'_e01.txt','r')
         frameCount = int(fileID.readline().rstrip())
+        # print("File: ", (id * 2) + 1, " Frame: ", frameCount)
         data = np.zeros((Constants.Constants.TotalJoints, Constants.Constants.Coordinates , frameCount))
 
         for i in range(frameCount):
@@ -40,7 +45,7 @@ def Train(userCount):
         ankleDistance = CalculateAnkleDistance.CalculateAnkleDistance(data)
         span = math.floor(len(ankleDistance)/Constants.Constants.SpanDivide)
         smoothAnkleDistance = smooth(ankleDistance,span)
-        fp = findpeaks(method='peakdetect',lookahead=5)
+        fp = findpeaks(method='peakdetect',lookahead=3)
         peakDict=  fp.fit(smoothAnkleDistance)
         peak_indices = []
         valley_indices = []
@@ -51,40 +56,48 @@ def Train(userCount):
                 peak_indices.append(index)
             index += 1
 
-        index = 0
-        for i in peakDict['df']['valley']:
-            if(i == True):
-                valley_indices.append(index)
-            index += 1
-        if(len(peak_indices)>= 3 ):
-            locs = peak_indices
-        elif(len(valley_indices) >= 3):
-            locs = valley_indices
-        else:
-            print('NOT ENOUGH DATA!')
+        # index = 0
+        # for i in peakDict['df']['valley']:
+        #     if(i == True):
+        #         valley_indices.append(index)
+        #     index += 1
+        # if(len(peak_indices)>= 3 ):
+        #     locs = peak_indices
+        # else:
+        #     locs = 
 
-        start = locs[0]
-        if(len(locs)<3):
+            
+
+        start = peak_indices[0]
+
+        if(len(peak_indices)<3):
             fin = len(smoothAnkleDistance)
         else:
-            fin = locs[2]
+            fin = peak_indices[2]
         angleArray = CalculateAngle.CalculateAngle(data[:,:,start:fin])
         sz = np.shape(angleArray)
         maxFrame = max(maxFrame,sz[0])
-        #storeData implementation
+        print(sz[0])
+        # print("Number of frames", sz[0])
+        StoreData.StoreData(id+1,id+1,angleArray)
         fileID.close()
 
-    topNIndex = TopNPairIndex.TopNPairIndex()
-    length = len(topNIndex)
+    
 
     fileID = open(Constants.Constants.TrainingSetFolder+'metadata.txt','w')
     fileID.write(str(userCount)+"\n"+str(maxFrame)+"\n")
+    fileID.close()
+    
+    topNIndex = TopNPairIndex.TopNPairIndex(maxFrame)
+    length = len(topNIndex)
+    fileID = open(Constants.Constants.TrainingSetFolder+'metadata.txt', 'w')
+    fileID.write(str(length)+'\n')
     for i in range(length):
         fileID.write(str(int(topNIndex[i]))+' ')
     fileID.close()
     
 
-
+# Train(20)
         
 
 

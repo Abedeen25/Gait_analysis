@@ -1,55 +1,63 @@
 import LoadData
 import Constants
 import numpy as np
+from operator import itemgetter
 import math
-from functools import reduce
-import operator as op
 
-def ncr(n, r):
-    r = min(r, n-r)
-    numer = reduce(op.mul, range(n, n-r, -1), 1)
-    denom = reduce(op.mul, range(1, r+1), 1)
-    return numer // denom
-
-def TopNPairIndex():
-    topNIndex = []
-    angleDataArray, userNameArray, userFrameArray,maxFrame,maxAngleCount = LoadData.LoadData()
+def TopNPairIndex(mmaxFrame):
+    DEBUG = 1
+    topNIndexRet = []
+    angleDataArray, userNameArray, userFrameArray, maxFrame, maxJRACount = LoadData.LoadData()
+    maxFrame = mmaxFrame
     userCount = len(userNameArray)
-    angleCount = maxAngleCount
-    rankArray = np.zeros((angleCount,2))
-    
-    
-    for i in range(angleCount):
-        angleArray = []
-        histogram = np.zeros((181))
-        maxAngle = -1
+    JRACount = maxJRACount
+    rankArray = [[0 for x in range(2)] for y in range(JRACount)]
+    if DEBUG == 1:
+        print("angleDataArray Size: ", len(angleDataArray), len(angleDataArray[0]), len(angleDataArray[0][0]))
+        print("userCount", len(userNameArray))
+        print("maxFrame", maxFrame)
+        print("maxJRACount", maxJRACount)
+
+    for JRA in range(JRACount):
+        if DEBUG == 2:
+            print("JRA Value: ", JRA)
+        JRAArray = []
+        histogram = [0 for x in range(181)]
+        maxJRAValue = -1
         for user in range(userCount):
-            for j in range(maxFrame):
-                angleArray.append(angleDataArray[j][i][user])
-        #angleArray = np.transpose(angleArray)
-        angleArray = angleArray[np.min(np.nonzero(angleArray)) : np.max(np.nonzero(angleArray))]
-        frameCount = len(angleArray)
-        for k in range(frameCount):
-            angle = int((round((angleArray[k]) * 180 )) / math.pi)
-            angle = angle + 1
-            maxAngle = max(angle , maxAngle)
-            histogram[angle] = histogram[angle] + 1
-        count = 0
-        for j in range(maxAngle):
-            if(histogram[j] != 0):
-                count = count + 1
-        rankArray[i][0] = i
-        rankArray[i][1] = count
+            for frame in range(userFrameArray[user]):
+                JRAArray.append(angleDataArray[frame][JRA][user])
+        if DEBUG == 2:
+            print("JRAArray Size: ", len(JRAArray))
+        JRACount = len(JRAArray)
+        for angleIndex in range(JRACount):
+            angle = JRAArray[angleIndex]
+            angle = int(round((angle * 180) / math.pi))
+            maxJRAValue = max(angle, maxJRAValue)
+            histogram[angle] += 1
+        if DEBUG == 2:
+            print("MaxJRAValue: ", maxJRAValue)
+        binCount = 0
+        for histogramIndex in range(maxJRAValue + 1):
+            if histogram[histogramIndex] != 0:
+                binCount += 1
+        if DEBUG == 2:
+            print("binCount:", binCount)
+        rankArray[JRA][0] = JRA
+        rankArray[JRA][1] = binCount
 
-    for b in range(angleCount):
-        for j in range(angleCount-1):
-            if(rankArray[j][1] < rankArray[j+1][1]):
-                temp = rankArray[j]
-                rankArray[j] = rankArray[j+1]
-                rankArray[j+1] = temp      
+    rankArray = sorted(rankArray, key = itemgetter(1), reverse = True)
+    if DEBUG == 3:
+        print(rankArray)
+
+    for rank in rankArray:
+        if rank[1] > Constants.Constants.MinBin:
+            topNIndexRet.append(rank[0])
     
-    for a in rankArray:
-        if (a[1] > Constants.Constants.MinBin):
-            topNIndex.append(a[0])
+    if DEBUG == 3:
+        print(TopNPairIndex)
 
-    return topNIndex
+    return topNIndexRet
+
+# print(TopNPairIndex.TopNPairIndex())
+            

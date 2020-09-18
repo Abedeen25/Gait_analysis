@@ -13,8 +13,8 @@ def ncr(n, r):
 def LoadData():
     fileID = open((C.Constants.TrainingSetFolder+'metadata.txt'), 'r')
     x = fileID.readline().rstrip()
-    print(x)
-    userCount = int(fileID.readline().rstrip())
+    # print(x)
+    userCount = int(x)
     maxFrame = int(fileID.readline().rstrip())
     fileID.close()
 
@@ -44,6 +44,7 @@ def LoadData():
             #angleDataArray[j,_,i] = angleArray
             for k in range(len(angleArray)):
                 angleDataArray[j][k][i] = angleArray[k]
+
         fileID.close()
 
     return angleDataArray, userNameArray, userFrameArray,maxFrame,maxAngleCount

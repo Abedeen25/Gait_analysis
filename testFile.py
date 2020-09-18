@@ -1,27 +1,6 @@
-import LoadData
-import Constants
-import numpy as np
-import operator as op
-from functools import reduce
+import matplotlib.pyplot as plt
 
-def ncr(n, r):
-    r = min(r, n-r)
-    numer = reduce(op.mul, range(n, n-r, -1), 1)
-    denom = reduce(op.mul, range(1, r+1), 1)
-    return numer // denom
+data =[0.3534464843633691,0.36276858204333384,0.27808724736159196,0.14440946626622353,0.16134786440972626,0.35709858101913405,0.4793968864190927,0.29269950951510815,0.18665985885884084,0.39908202579038865,0.5552263688525014,0.6281667745691015,0.6526419952503115,0.6157022605102225,0.5820201131031131,0.5149713688200723,0.3839206919638367,0.25077828547710634,0.22007118673694892,0.26576828330642277,0.38695016593633946,0.5078989030570948]
 
-def TopNPairIndex():
-    angleDataArray, userNameArray, _ = LoadData.LoadData()
-    userCount = len(userNameArray)
-    angleCount = ncr(Constants.Constants.TotalJoints,2)
-    rankArray = np.zeros((angleCount,2))
-    for i in range(angleCount):
-        histogram = np.zeros((1,181))
-        maxAngle = -1
-        for user in range(userCount):
-            for j in (angleDataArray):
-                print(j[i][user])
-
-TopNPairIndex()
-# angleDataArray, userNameArray, _ = LoadData.LoadData()
-# print(angleDataArray.shape)
+plt.plot(data)
+plt.show()
