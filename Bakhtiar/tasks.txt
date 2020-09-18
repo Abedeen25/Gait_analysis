@@ -1,0 +1,10 @@
+- for each user, read files
+- store x, y, z for each frame in an array
+- calculate the ankle distance
+- use average filter using span
+- find peaks
+- take the first peak as start, the 3/last peak as end
+- calculate all possible 171 angles
+- calculate the topNIndices with maximum bin count
+- store the data for only those indices for each user
+- store the indices also

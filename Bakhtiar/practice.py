@@ -61,7 +61,8 @@ data['general'] = {
         'DatasetFolder' : 'DataSet',
         'TrainingSetFolder' : 'TrainingSet',
         'TestSetFolder' : 'TestSet',
-        'TrainingFileNamePrefix' : 'User_Information_'
+        'TrainingFileNamePrefix' : 'User_Information_',
+        'LookAhead' : 3
     }
 
 
