@@ -2,6 +2,7 @@ import os
 import math
 import CalculateAnkleDistance
 import AverageFilter
+import PeakFind
 
 def train(userCount, datasetConst, genConst):
     maxFrameCount = 0
@@ -21,8 +22,8 @@ def train(userCount, datasetConst, genConst):
                 data[joint][genConst['yCord']][frame] = framePoints[3 * joint + 1]
                 data[joint][genConst['zCord']][frame] = framePoints[3 * joint + 2]
         ankleDistance = CalculateAnkleDistance.calculateAnkleDistance(data, frameCount, datasetConst, genConst)
-        smoothAnkleDistance = AverageFilter.averageFilter(data, math.floor(len(ankleDistance)/datasetConst['SpanDivide']))
-        print(smoothAnkleDistance)
-
+        smoothAnkleDistance = AverageFilter.averageFilter(ankleDistance, math.floor(len(ankleDistance)/datasetConst['SpanDivide']))
+        start, fin = PeakFind.peakFind(smoothAnkleDistance, genConst)
+        
 
 
