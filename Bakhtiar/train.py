@@ -17,6 +17,3 @@ def train(userCount, datasetConst, genConst):
         dataFromFile[str(userID)].append(preprocessedTrainData)
     topNPairIndex = TopNPairIndex.topNPairIndex(dataFromFile, genConst)
     StoreData.storeData(dataFromFile, topNPairIndex, genConst)
-
-        
-    

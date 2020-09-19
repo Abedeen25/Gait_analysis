@@ -36,4 +36,3 @@ def storeData(data, topNPairIndex, genConst):
     with open(metadataFileWithPath, 'w') as outFile:
         json.dump(meta, outFile)
         
-
