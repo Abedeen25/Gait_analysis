@@ -9,4 +9,4 @@ with open('constants.json') as constantsJSONFile:
     genConst = data['general']
     # Training using the dataset
     Train.train(datasetConst['UserCount'], datasetConst, genConst)
-    Test.test('u1s1.txt', datasetConst, genConst)
+    Test.test('u2s1.txt', datasetConst, genConst)

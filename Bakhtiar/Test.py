@@ -1,3 +1,4 @@
+import sys
 import os
 import Preprocess
 import LoadData
@@ -14,10 +15,8 @@ def test(fileName, datasetConst, genConst):
     topNTestPairFrames = TopNPairIndex.extractTopNIndex(preprocessedTestData, topNPairIndex)
     
     userCount = len(trainData)
-    voteCount = [0] * (userCount + 1)
-    storeMismatch = [0] * (userCount + 1)
-    print(DTW.dtw([1, 2, 3, 4], [1, 2, 3, 4]))
-"""
+    storeMismatch = [sys.float_info.max] * (userCount + 1)
+    
     for user in range(1, userCount + 1):
         storedTrainFrameCount = trainData[str(user)][0]
         storedTrainData = trainData[str(user)][1]
@@ -33,8 +32,6 @@ def test(fileName, datasetConst, genConst):
                 testDTW.append(testData[frame][idx])
             totalMismatch += DTW.dtw(trainDTW, testDTW)
         storeMismatch[user] = totalMismatch
-    print(storeMismatch)
-
-"""
-
     
+    detectedUser = storeMismatch.index(min(storeMismatch))
+    print(detectedUser)
