@@ -34,3 +34,11 @@ def topNPairIndex(data, genConst):
     
     return topNIndexRet
 
+def extractTopNIndex(data, topNPairIndex):
+    topNPairFrames = []
+    for frame in data:
+        topNPairs = []
+        for idx in topNPairIndex:
+            topNPairs.append(frame[idx])
+        topNPairFrames.append(topNPairs)
+    return topNPairFrames

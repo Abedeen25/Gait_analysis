@@ -1,6 +1,7 @@
 import os
 import Preprocess
 import LoadData
+import TopNPairIndex
 
 def test(fileName, datasetConst, genConst):
     currentFolderName = os.getcwd()
@@ -10,10 +11,7 @@ def test(fileName, datasetConst, genConst):
 
     N = metaData["N"]
     topNPairIndex = metaData["TopNPairIndex"]
-    topNTestPairFrames = []
-    for frame in preprocessedTestData:
-        topNTestPair = []
-        for idx in topNPairIndex:
-            topNTestPair.append(frame[idx])
-        topNTestPairFrames.append(topNPairs)
+    topNTestPairFrames = TopNPairIndex.extractTopNIndex(preprocessedTestData, topNPairIndex)
+    
+    
     
