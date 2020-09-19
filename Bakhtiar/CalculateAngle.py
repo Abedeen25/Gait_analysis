@@ -2,7 +2,6 @@ import numpy as np
 import itertools
 from math import comb, sqrt, acos
 
-
 def calculateAngle(data, start, fin, datasetConst, genConst):
     data = np.array(data)
     data = data[:, :, start : fin]

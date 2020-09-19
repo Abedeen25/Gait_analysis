@@ -2,6 +2,7 @@ import os
 import math
 import json
 import Preprocess
+import TopNPairIndex
 
 def train(userCount, datasetConst, genConst):
     maxFrameCount = 0
@@ -15,6 +16,8 @@ def train(userCount, datasetConst, genConst):
         dataFromFile[str(userID)] = []
         dataFromFile[str(userID)].append(frameCount)
         dataFromFile[str(userID)].append(preprocessedTrainData)
-    
+    topNPairIndex = TopNPairIndex.topNPairIndex(dataFromFile, genConst)
+
+
         
     
