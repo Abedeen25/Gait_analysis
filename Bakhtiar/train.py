@@ -1,14 +1,17 @@
 import os
 import math
+import json
 import CalculateAnkleDistance
 import AverageFilter
 import PeakFind
+import CalculateAngle
 
 def train(userCount, datasetConst, genConst):
     maxFrameCount = 0
-    for fileName in range(1, userCount + 1):
+    dataFromFile = {}
+    for userID in range(1, userCount + 1):
         currentFolderName = os.getcwd()
-        currentFileName = "u" + str(fileName) + "s1.txt"
+        currentFileName = "u" + str(userID) + "s1.txt"
         fileNameWithPath = os.path.join(currentFolderName, genConst['DatasetFolder'], datasetConst['Folder'], currentFileName)
         
         dataFile = open(fileNameWithPath, "r")
@@ -24,6 +27,10 @@ def train(userCount, datasetConst, genConst):
         ankleDistance = CalculateAnkleDistance.calculateAnkleDistance(data, frameCount, datasetConst, genConst)
         smoothAnkleDistance = AverageFilter.averageFilter(ankleDistance, math.floor(len(ankleDistance)/datasetConst['SpanDivide']))
         start, fin = PeakFind.peakFind(smoothAnkleDistance, genConst)
-        
-
-
+        angleArray = CalculateAngle.calculateAngle(data, start, fin, datasetConst, genConst)
+        maxFrameCount = max(maxFrameCount, fin - start)
+        dataFromFile[str(userID)] = []
+        dataFromFile[str(userID)].append(frameCount)
+        dataFromFile[str(userID)].append(angleArray)
+        dataFile.close()
+    
