@@ -1,5 +1,6 @@
 import json
 import Train
+import Test
 
 DATASET = 'UTKinect'
 with open('constants.json') as constantsJSONFile:
@@ -8,3 +9,4 @@ with open('constants.json') as constantsJSONFile:
     genConst = data['general']
     # Training using the dataset
     Train.train(datasetConst['UserCount'], datasetConst, genConst)
+    Test.test('u1s1.txt', datasetConst, genConst)

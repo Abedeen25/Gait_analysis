@@ -11,7 +11,10 @@ def peakFind(data, genConst):
             peakIndices.append(index)
         index += 1
 
-    start = peakIndices[0]
+    if len(peakIndices) > 0:
+        start = peakIndices[0]
+    else:
+        start = 0
     if(len(peakIndices) < 3):
         fin = len(data)
     else:
